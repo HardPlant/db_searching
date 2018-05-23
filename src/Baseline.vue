@@ -6,7 +6,7 @@
       app
     >
       <v-list dense>
-        <v-list-tile @click="" :to="{path:'/'}">
+        <v-list-tile :to="{path:'/'}">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -14,7 +14,7 @@
             <v-list-tile-title>Main</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="" :to="{path:'/schedule'}">
+        <v-list-tile :to="{path:'/schedule'}">
           <v-list-tile-action>
             <v-icon>schedule</v-icon>
           </v-list-tile-action>
@@ -22,7 +22,7 @@
             <v-list-tile-title>Set Schedule</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="" :to="{path:'/showroom'}">
+        <v-list-tile :to="{path:'/showroom'}">
           <v-list-tile-action>
             <v-icon>dashboard</v-icon>
           </v-list-tile-action>
