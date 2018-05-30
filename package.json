@@ -13,8 +13,10 @@
     "stop": "pm2 stop all"
   },
   "dependencies": {
+    "composer-client": "^0.19.6",
     "express": "^4.16.3",
     "material-design-icons-iconfont": "^3.0.3",
+    "moment": "^2.22.1",
     "vue": "^2.5.11",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.18"
