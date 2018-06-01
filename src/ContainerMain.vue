@@ -39,12 +39,19 @@
                 </v-data-table>
             </v-card-text>
         </v-card>
+  <v-layout row-wrap>
+      <card-bar-chart></card-bar-chart>
+      <card-line-chart></card-line-chart>
+      </v-layout>
     </v-container>
 </template>
 
 <script>
+import CardBarChart from './components/CardBarChart.vue'
+import CardLineChart from './components/CardLineChart.vue'
+
 export default{
-    
+    components : {CardBarChart, CardLineChart},
     data: () => ({
       pagination: {
         sortBy: 'name'

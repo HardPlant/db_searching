@@ -209,7 +209,7 @@ async function removeAll(FDQN) {
     await registry.removeAll(list)
 }
 async function query_FindEmergencyBed(x,y){
-    let beds = await query('FindEmergencyBed');
+    let beds = await connection.query('FindEmergencyBed');
 }
 
 async function updateBed(bed){
