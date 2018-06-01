@@ -7,10 +7,6 @@ let BusinessNetworkConnection = composer.BusinessNetworkConnection;
 let connection = new BusinessNetworkConnection();
 let definition = "";
 let factory = definition.getFactory();
-<<<<<<< HEAD:fabric_client.js
-
-=======
->>>>>>> bbe51ab7ee8c354fdf663a1d1147f5bdd11bdd7a:fabric_test_client.js
 main();
 
 async function main() {
@@ -47,11 +43,7 @@ async function request(requester, x, y) {
     let serializer = definition.getSerializer();
 
     let registry = connection.getAssetRegistry('org.hackerton.Patient');
-<<<<<<< HEAD:fabric_client.js
     
-=======
-
->>>>>>> bbe51ab7ee8c354fdf663a1d1147f5bdd11bdd7a:fabric_test_client.js
     let currentTime = moment().unix();
 
     patient = factory.newResource('org.hackerton', 'Patient', currentTime)
@@ -72,7 +64,6 @@ async function request(requester, x, y) {
     await connection.submitTransaction(request)
 }
 
-<<<<<<< HEAD:fabric_client.js
 async function addDoctor(name, major, hospital){
     let registry = await connection.getParticipantRegistry('org.hackerton.Doctor');
     let currentTime = moment().unix();
@@ -95,14 +86,6 @@ async function addHospital(name){
     let currentTime = moment().unix();
 
     hospital = factory.newResource('org.hackerton','Hospital', currentTime.toString());
-=======
-async function addHospital(name) {
-    let registry = await connection.getParticipantRegistry('org.hackerton.Hospital');
-
-
-    let currentTime = moment().unix();
-    hospital = factory.newResource('org.hackerton', 'Hospital', currentTime.toString());
->>>>>>> bbe51ab7ee8c354fdf663a1d1147f5bdd11bdd7a:fabric_test_client.js
     hospital.name = name;
     await registry.add(hospital);
 }
@@ -157,19 +140,3 @@ async function removeAll(FDQN) {
     let list = await registry.getAll();
     await registry.removeAll(list)
 }
-<<<<<<< HEAD:fabric_client.js
-=======
-
-function addDoctor() {
-
-}
-
-function addSchedule() {}
-
-function deleteSchedule() {}
-
-
-function addCar() {}
-
-function modifyCar() {}
->>>>>>> bbe51ab7ee8c354fdf663a1d1147f5bdd11bdd7a:fabric_test_client.js
