@@ -79,6 +79,7 @@ async function addRequester(x, y){
     let newData = factory.newResource('org.hackerton','Requester', currentTime.toString());
     newData.x = x;
     newData.y = y;
+    await registry.add(newData);
 }
 async function addHospital(name){
     let registry = await connection.getParticipantRegistry('org.hackerton.Hospital');
@@ -127,7 +128,6 @@ async function addPatient(requester, x, y){
     newData.y = y;
     await registry.add(newData);
 }
-
 
 async function getAll(FDQN){
     let registry = await connection.getParticipantRegistry(FDQN);
