@@ -6,6 +6,7 @@ let BusinessNetworkConnection = composer.BusinessNetworkConnection;
 
 let connection = new BusinessNetworkConnection();
 let definition = "";
+let factory = definition.getFactory();
 
 main();
 
@@ -42,7 +43,7 @@ async function request(requester, x, y){
     let serializer = definition.getSerializer();
 
     let registry = connection.getAssetRegistry('org.hackerton.Patient');
-    let factory = definition.getFactory();
+    
     let currentTime = moment().unix();
 
     patient = factory.newResource('org.hackerton', 'Patient', currentTime)
@@ -63,15 +64,70 @@ async function request(requester, x, y){
     await connection.submitTransaction(request)
 }
 
+async function addDoctor(name, major, hospital){
+    let registry = await connection.getParticipantRegistry('org.hackerton.Doctor');
+    let currentTime = moment().unix();
+    let newDoctor = factory.newResource('org.hackerton','Doctor', currentTime.toString());
+    newDoctor.name = name;
+    newDoctor.major = major;
+    newDoctor.hospital = hospital;
+    await registry.add(newDoctor);
+}
+async function addRequester(x, y){
+    let registry = await connection.getParticipantRegistry('org.hackerton.Requester');
+    let currentTime = moment().unix();
+    let newData = factory.newResource('org.hackerton','Requester', currentTime.toString());
+    newData.x = x;
+    newData.y = y;
+}
 async function addHospital(name){
     let registry = await connection.getParticipantRegistry('org.hackerton.Hospital');
-    let factory = definition.getFactory();
-
     let currentTime = moment().unix();
+
     hospital = factory.newResource('org.hackerton','Hospital', currentTime.toString());
     hospital.name = name;
-    await registry.add(hospital);;
+    await registry.add(hospital);
 }
+async function addCar(x, y, owner){
+    let registry = await connection.getParticipantRegistry('org.hackerton.EmergencyCar');
+    let currentTime = moment().unix();
+    let newData = factory.newResource('org.hackerton','EmergencyCar', currentTime.toString());
+    newData.x = x;
+    newData.y = y;
+    newData.isOccupied = false;
+    newData.owner = owner;
+    await registry.add(newData);
+}
+async function addBed(x, y, owner){
+    let registry = await connection.getParticipantRegistry('org.hackerton.EmergencyBed');
+    let currentTime = moment().unix();
+    let newData = factory.newResource('org.hackerton','EmergencyBed', currentTime.toString());
+    newData.x = x;
+    newData.y = y;
+    newData.isOccupied = false;
+    newData.owner = owner;
+    await registry.add(newData);
+
+}
+async function addSchedule(doctor, start, end){
+    let registry = await connection.getAssetRegistry('org.hackerton.Schedule');
+    let currentTime = moment().unix();
+    let newData = factory.newResource('org.hackerton','Schedule', currentTime.toString());
+    newData.doctor = doctor;
+    newData.start = start;
+    newData.end = end;
+    await registry.add(newData);
+}
+async function addPatient(requester, x, y){
+    let registry = await connection.getAssetRegistry('org.hackerton.Patient');
+    let currentTime = moment().unix();
+    let newData = factory.newResource('org.hackerton','Patient', currentTime.toString());
+    newData.requester = requester;
+    newData.x = x;
+    newData.y = y;
+    await registry.add(newData);
+}
+
 
 async function getAll(FDQN){
     let registry = await connection.getParticipantRegistry(FDQN);
@@ -84,18 +140,3 @@ async function removeAll(FDQN){
     let list = await registry.getAll();
     await registry.removeAll(list)
 }
-function removeAllHospital(){
-
-}
-
-function addDoctor(){
-
-}
-function getSchedule(){}
-function setSchedule(){}
-function deleteSchedule(){}
-
-
-function addCar(){}
-function modifyCar(){}
-
