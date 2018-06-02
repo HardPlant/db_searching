@@ -15,15 +15,15 @@
             <v-list-tile-title>대시보드</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile :to="{path:'/schedule'}">
+        <v-list-tile :to="{path:'/currentbeds'}">
           <v-list-tile-action>
             <v-icon>schedule</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>구급차 현황</v-list-tile-title>
+            <v-list-tile-title>구급실 현황</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile :to="{path:'/schedule'}">
+        <v-list-tile :to="{path:'/currentcalls'}">
           <v-list-tile-action>
             <v-icon>schedule</v-icon>
           </v-list-tile-action>
@@ -31,19 +31,19 @@
             <v-list-tile-title>구급차 출동 상황</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile :to="{path:'/showroom'}">
+        <v-list-tile :to="{path:'/currentrequests'}">
           <v-list-tile-action>
             <v-icon>dashboard</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>구급차 요청</v-list-tile-title>
+            <v-list-tile-title>응급구조 요청 현황</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="indigo" dark fixed app>
+    <v-toolbar color="black" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>InfoSec119 Emergency on IoT</v-toolbar-title>
+      <v-toolbar-title>응급구조정보공유체계 현황판</v-toolbar-title>
     </v-toolbar>
     <v-content>
         <v-container fluid>
@@ -52,7 +52,7 @@
             </v-fade-transition>
         </v-container>
     </v-content>
-    <v-footer color="indigo" app>
+    <v-footer color="black" app>
       <span class="white--text">&copy; Information Security Hackerton 2018</span>
     </v-footer>
   </v-app>
