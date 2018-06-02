@@ -14,23 +14,23 @@ Vue.use(VueRouter)
 
 
 const router = new VueRouter({
-  routes:[{
-    path:'/',
-    component: ContainerMain
-  },{
-    path:'/currentcalls',
-    component: ContainerCarCalling
-  },{
-    path:'/currrentbeds',
-    component: ContainerCurrentBeds
-  },{
-    path:'/currrentrequests',
-    component: ContainerCurrentRequests
-  }]
+    routes: [{
+        path: '/',
+        component: ContainerMain
+    }, {
+        path: '/currentcalls',
+        component: ContainerCarCalling
+    }, {
+        path: '/currentbeds',
+        component: ContainerCurrentBeds
+    }, {
+        path: '/currentrequests',
+        component: ContainerCurrentRequests
+    }]
 })
 
 new Vue({
-  el: '#app',
-  router,
-  render: h => h(App)
+    el: '#app',
+    router,
+    render: h => h(App)
 })

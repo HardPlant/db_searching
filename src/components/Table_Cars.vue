@@ -1,7 +1,7 @@
 <template>
     <v-card>
             <v-card-title>
-                <h2>Overview</h2>
+                <h2>구급차 현황</h2>
             </v-card-title>
             <v-divider/>
             <v-card-text>

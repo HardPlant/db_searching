@@ -1,15 +1,15 @@
 <template id="container-showroom">
     <v-container>
-        <h1>Hello ShowRoom!</h1>
-        <v-card>
-            <h1>Hello ShowRoom</h1>
-        </v-card>
+        <recent-request width="100%" height="auto">
+        </recent-request>
     </v-container>
 </template>
 
 <script>
+import RecentRequest from "./components/CardBarChart.vue"
 export default{
-    
+    name: "Container",
+    components : {RecentRequest}
 }
 </script>
 
