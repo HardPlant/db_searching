@@ -1,8 +1,8 @@
-<template id="container-schedule">
+<template id="container-showroom">
     <v-container>
-        <h1>구급차 출동 상황</h1>
+        <h1>Hello ShowRoom!</h1>
         <v-card>
-            <h1>Hello Scheduler</h1>
+            <h1>Hello ShowRoom</h1>
         </v-card>
     </v-container>
 </template>

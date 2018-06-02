@@ -5,8 +5,9 @@ import App from './Baseline.vue'
 import VueRouter from 'vue-router'
 
 import ContainerMain from './ContainerMain.vue'
-import ContainerSchedule from './ContainerSchedule.vue'
-import ContainerShowRoom from './ContainerShowRoom.vue'
+import ContainerCarCalling from './ContainerCarCalling.vue'
+import ContainerCurrentBeds from './ContainerCurrentBeds.vue'
+import ContainerCurrentRequests from './ContainerCurrentRequests.vue'
 
 Vue.use(Vuetify)
 Vue.use(VueRouter)
@@ -17,11 +18,14 @@ const router = new VueRouter({
     path:'/',
     component: ContainerMain
   },{
-    path:'/schedule',
-    component: ContainerSchedule
+    path:'/currentcalls',
+    component: ContainerCarCalling
   },{
-    path:'/showroom',
-    component: ContainerShowRoom
+    path:'/currrentbeds',
+    component: ContainerCurrentBeds
+  },{
+    path:'/currrentrequests',
+    component: ContainerCurrentRequests
   }]
 })
 
