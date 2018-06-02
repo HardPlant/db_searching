@@ -37,7 +37,7 @@ export default {
         requester :'1',
         lang : 0,
         long : 0,
-        major = ''
+        major : ''
     }),
 
     methods: {

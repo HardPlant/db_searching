@@ -8,7 +8,7 @@ import ContainerMain from './ContainerMain.vue'
 import ContainerCarCalling from './ContainerCarCalling.vue'
 import ContainerCurrentBeds from './ContainerCurrentBeds.vue'
 import ContainerCurrentRequests from './ContainerCurrentRequests.vue'
-
+import ContainerRequest from './ContainerRequest.vue'
 Vue.use(Vuetify)
 Vue.use(VueRouter)
 
@@ -26,6 +26,9 @@ const router = new VueRouter({
     }, {
         path: '/currentrequests',
         component: ContainerCurrentRequests
+    }, {
+        path: '/request',
+        component: ContainerRequest
     }]
 })
 
