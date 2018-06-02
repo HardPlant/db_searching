@@ -57,7 +57,7 @@
         </v-list-tile>
         <v-divider></v-divider>
         <v-spacer></v-spacer>
-        <v-list-tile :to="{path:'/currentrequests'}">
+        <v-list-tile :to="{path:'/settings'}">
         <v-list-tile-action>
           <v-icon>settings</v-icon>
         </v-list-tile-action>

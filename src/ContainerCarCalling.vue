@@ -8,10 +8,7 @@
                 <line-recent-call></line-recent-call>
             </v-card-text>
         </v-card>
-        <v-card>
-            <v-card-title>구급차 현황</v-card-title>
-            <table-cars></table-cars>
-        </v-card>
+        <table-cars></table-cars>
     </v-container>
 </template>
 

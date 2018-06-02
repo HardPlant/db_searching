@@ -1,15 +1,21 @@
 <template id="container-showroom">
     <v-container>
-        <h1>Hello ShowRoom!</h1>
         <v-card>
-            <h1>Hello ShowRoom</h1>
+            <v-card-title>
+            <h1>구급실 현황</h1>
+            </v-card-title>
+            <v-card-text>
+            <bed-table></bed-table>
+            </v-card-text>
         </v-card>
     </v-container>
 </template>
 
 <script>
+import BedTable from './components/Table_Beds.vue'
 export default{
-    
+    name : "container",
+    components : {BedTable}
 }
 </script>
 
