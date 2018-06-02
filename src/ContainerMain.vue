@@ -1,5 +1,6 @@
 <template id="container-main">
     <v-container>
+      <t-map name="example"></t-map>
         <v-card>
             <v-card-title>
                 <h2>Overview</h2>
@@ -49,9 +50,9 @@
 <script>
 import CardBarChart from './components/CardBarChart.vue'
 import CardLineChart from './components/CardLineChart.vue'
-
+import TMap from './components/TMap.vue'
 export default{
-    components : {CardBarChart, CardLineChart},
+    components : {CardBarChart, CardLineChart, TMap},
     data: () => ({
       pagination: {
         sortBy: 'name'

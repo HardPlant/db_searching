@@ -1,7 +1,7 @@
 <template>
 <v-card :width="width" :height="height">
     <v-card-title>
-        <h2>출동 상황</h2>
+        <h2>일당 평균 출동 수</h2>
     </v-card-title>
     <v-card-text>
     <bar-example></bar-example>

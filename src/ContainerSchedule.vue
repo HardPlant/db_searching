@@ -1,6 +1,6 @@
 <template id="container-schedule">
     <v-container>
-        <h1>Hello Scheduler!</h1>
+        <h1>구급차 출동 상황</h1>
         <v-card>
             <h1>Hello Scheduler</h1>
         </v-card>

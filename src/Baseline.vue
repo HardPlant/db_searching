@@ -2,16 +2,17 @@
   <v-app id="app">
     <v-navigation-drawer
       v-model="drawer"
+      permanent
       fixed
       app
     >
       <v-list dense>
         <v-list-tile :to="{path:'/'}">
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>dashboard</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Main</v-list-tile-title>
+            <v-list-tile-title>대시보드</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile :to="{path:'/schedule'}">
@@ -19,7 +20,15 @@
             <v-icon>schedule</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Set Schedule</v-list-tile-title>
+            <v-list-tile-title>구급차 현황</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile :to="{path:'/schedule'}">
+          <v-list-tile-action>
+            <v-icon>schedule</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>구급차 출동 상황</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile :to="{path:'/showroom'}">
@@ -27,7 +36,7 @@
             <v-icon>dashboard</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Show Emergency Room</v-list-tile-title>
+            <v-list-tile-title>구급차 요청</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
