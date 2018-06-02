@@ -2,7 +2,7 @@
   <v-app id="app">
     <v-toolbar color="black" dark fixed app>
       <v-icon>call_to_action</v-icon>
-      <v-toolbar-title align-center>응급구조정보공유체계 현황판</v-toolbar-title>
+      <v-toolbar-title align-center>현황판</v-toolbar-title>
     </v-toolbar>
     <v-navigation-drawer
       v-model="drawer"
@@ -11,6 +11,17 @@
       app
     >
       <v-list dense>
+        <v-list-tile>
+        <v-list-tile-title class="title">
+          <h4>[ 통합응급의료관리시스템 ] </h4>
+        </v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+        <v-list-tile-sub-title>
+          <h4 style="text-align:center">Powered by Hyperleder Fabric</h4>
+        </v-list-tile-sub-title>
+        </v-list-tile>
+        <v-spacer></v-spacer>
         <v-list-tile :to="{path:'/'}">
           <v-list-tile-action>
             <v-icon>dashboard</v-icon>
@@ -83,3 +94,10 @@
     }
   }
 </script>
+<style scoped>
+@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.ng{font-family: 'Nanum Gothic', sans-serif;}
+#title{text-align: center;}
+</style>

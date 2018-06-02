@@ -7,10 +7,10 @@
             <v-card-text>
                 <v-data-table
                 :headers="headers"
-                :items="desserts"
+                :items="cars"
                 :pagination.sync="pagination"
                 select-all
-                item-key="name"
+                item-key="CarID"
                 class="elevation-1"
                 >
                 <template slot="headers" slot-scope="props">
@@ -28,11 +28,11 @@
                 </template>
                 <template slot="items" slot-scope="props">
                 <tr :active="props.selected" @click="props.selected = !props.selected">
-                <td>{{ props.item.name }}</td>
-                <td class="text-xs-right">{{ props.item.startDate }}</td>
-                <td class="text-xs-right">{{ props.item.startTime }}</td>
-                <td class="text-xs-right">{{ props.item.endDate }}</td>
-                <td class="text-xs-right">{{ props.item.endTime }}</td>
+                <td>{{ props.item.CarID }}</td>
+                <td class="text-xs-right">{{ props.item.x }}</td>
+                <td class="text-xs-right">{{ props.item.y }}</td>
+                <td class="text-xs-right">{{ props.item.isOccupied }}</td>
+                <td class="text-xs-right">{{ props.item.owner }}</td>
                 </tr>
                 </template>
                 </v-data-table>
@@ -43,34 +43,34 @@
 <script>
 export default {data : ()=>({
       pagination: {
-        sortBy: 'name'
+        sortBy: 'CarID'
       },
       headers: [
         {
-          text: 'Schedule',
+          text: '차 ID',
           align: 'left',
-          value: 'name'
+          value: 'CarID'
         },
-        { text: 'Start Date', value: 'startDate' },
-        { text: 'Start Time', value: 'startTime' },
-        { text: 'End Date', value: 'endDate' },
-        { text: 'End Time', value: 'endTime' },
+        { text: '현재 위도', value: 'x' },
+        { text: '현재 경도', value: 'y' },
+        { text: '수송중', value: 'isOccupied' },
+        { text: '소유자', value: 'owner' },
       ],
-      desserts: [
+      cars: [
         {
           value: false,
-          name: 'Frozen Yogurt',
-          startDate : "5/10",
-          startTime : "10:00",
-          endDate : "5/10",
-          endTime : "12:00"
+          CarID: '1',
+          x : "100.1000",
+          y : "215.3000",
+          isOccupied : "대기 중",
+          owner : "삼성서울병원"
         },
       ]
     }),
 methods: {
       toggleAll () {
         if (this.selected.length) this.selected = []
-        else this.selected = this.desserts.slice()
+        else this.selected = this.cars.slice()
       },
       changeSort (column) {
         if (this.pagination.sortBy === column) {
