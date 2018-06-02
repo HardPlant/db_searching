@@ -47,7 +47,7 @@ export default {data : ()=>({
       },
       headers: [
         {
-          text: '차 ID',
+          text: '구급실 좌석 ID',
           align: 'left',
           value: 'BedID'
         },

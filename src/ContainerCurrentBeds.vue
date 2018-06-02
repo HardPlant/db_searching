@@ -1,21 +1,22 @@
 <template id="container-showroom">
-    <v-container>
-        <v-card>
-            <v-card-title>
-            <h1>구급실 현황</h1>
-            </v-card-title>
-            <v-card-text>
+    <v-container grid-list-md>
+    <v-layout row wrap>
+        <v-flex xs12>
             <bed-table></bed-table>
-            </v-card-text>
-        </v-card>
+        </v-flex>
+        <v-flex xs12>
+            <patient-table></patient-table>
+        </v-flex>
+    </v-layout>
     </v-container>
 </template>
 
 <script>
 import BedTable from './components/Table_Beds.vue'
+import PatientTable from './components/Table_Patient.vue'
 export default{
     name : "container",
-    components : {BedTable}
+    components : {BedTable, PatientTable}
 }
 </script>
 

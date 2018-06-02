@@ -55,6 +55,14 @@
             <v-list-tile-title>응급구조 요청 현황</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile color="red" @click="showModal=true">
+          <v-list-tile-action >
+            <v-icon>dashboard</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>응급구조 요청</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-divider></v-divider>
         <v-spacer></v-spacer>
         <v-list-tile :to="{path:'/settings'}">
@@ -74,6 +82,45 @@
                 <router-view/>
             </v-fade-transition>
         </v-container>
+        <v-dialog v-model="showModal" max-width="500px">
+        <v-card>
+          <v-card-title>
+            응급구조 요청
+          </v-card-title>
+          <v-card-text>
+            <v-form>
+              <v-text-field
+        v-model="requester"
+        label="요청자 ID"
+        disabled></v-text-field>
+        <v-text-field
+        v-model="lang"
+        :rules="[v=>!!v || '위도값은 필수입니다']"
+        label="위도"
+        required></v-text-field>
+        <v-text-field
+        v-model="long"
+        :rules="[v=>!!v || '경도값은 필수입니다']"
+        label="경도"
+        required></v-text-field>
+        <v-text-field
+        v-model="major"
+        label="특이사항"
+        ></v-text-field>
+        <v-divider></v-divider>
+        <v-btn
+        :disabled="!valid"
+        @click="submit"
+        >
+        요청하기
+        </v-btn>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" flat @click.stop="showModal=false">닫기</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-content>
     <v-footer color="black" app>
       <span class="white--text">&copy; Information Security Hackerton 2018</span>
@@ -85,14 +132,37 @@
 
   export default {
     data: () => ({
-      drawer: null
+      drawer: null,
+      showModal:false,
+      valid: true,
+      requester :'1',
+      lang : 0,
+      long : 0,
+      major : ''
     }),
     props: {
       source: String
     },
     components : {
+    },
+
+    methods: {
+      submit () {
+        if (this.$refs.form.validate()) {
+          // Native form submission is not yet supported
+          axios.post(CONF.request, {
+            requester: this.requester,
+            x: this.lang,
+            y: this.long,
+          })
+        }
+      },
+      clear () {
+        this.$refs.form.reset()
+      }
     }
   }
+  
 </script>
 <style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);

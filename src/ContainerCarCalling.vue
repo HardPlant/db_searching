@@ -1,14 +1,13 @@
 <template id="container-schedule">
-    <v-container>
-        <v-card>
-            <v-card-title>
-                <h1>구급차 출동 상황</h1>
-            </v-card-title>
-            <v-card-text>
-                <line-recent-call></line-recent-call>
-            </v-card-text>
-        </v-card>
+    <v-container grid-list-md>
+    <v-layout row wrap>
+        <v-flex xs12>
+    <line-recent-call></line-recent-call>
+        </v-flex>
+        <v-flex xs12>
         <table-cars></table-cars>
+        </v-flex>
+    </v-layout>
     </v-container>
 </template>
 

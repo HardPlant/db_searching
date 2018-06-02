@@ -1,7 +1,7 @@
 <template>
     <v-card>
             <v-card-title>
-                <h2>요청 현황</h2>
+                <h2>환자 현황</h2>
             </v-card-title>
             <v-divider/>
             <v-card-text>
@@ -10,7 +10,7 @@
                 :items="cars"
                 :pagination.sync="pagination"
                 select-all
-                item-key="transactionTimestamp"
+                item-key="PatientID"
                 class="elevation-1"
                 >
                 <template slot="headers" slot-scope="props">
@@ -28,8 +28,8 @@
                 </template>
                 <template slot="items" slot-scope="props">
                 <tr :active="props.selected" @click="props.selected = !props.selected">
-                <td>{{ props.item.transactionTimestamp }}</td>
-                <td class="text-xs-right">{{ props.item.Requester }}</td>
+                <td>{{ props.item.PatientID }}</td>
+                <td class="text-xs-right">{{ props.item.x }}</td>
                 <td class="text-xs-right">{{ props.item.y }}</td>
                 </tr>
                 </template>
@@ -41,25 +41,26 @@
 <script>
 export default {data : ()=>({
       pagination: {
-        sortBy: 'transactionTimestamp'
+        sortBy: 'PatientID'
       },
       headers: [
         {
-          text: '요청 시간',
+          text: '환자 ID',
           align: 'left',
-          value: 'transactionTimestamp'
+          value: 'PatientID'
         },
-        { text: '요청자 ID', value: 'Requester' },
+        { text: '현재 위도', value: 'x' },
+        { text: '현재 경도', value: 'y' }
       ],
       cars: [
         {
           value: false,
-          transactionTimestamp: '1132',
-          Requester : "1",
+          PatientID: '1',
+          x : "100.1000",
+          y : "215.3000",
         },
       ]
     }),
-    
 methods: {
       toggleAll () {
         if (this.selected.length) this.selected = []

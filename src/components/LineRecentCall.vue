@@ -1,7 +1,7 @@
 <template>
 <v-card :width="width" :height="height">
     <v-card-title>
-        <h2>최근 출동 횟수</h2>
+        <h2>최근 응급의료 출동 횟수</h2>
     </v-card-title>
     <v-card-text>
     <line-example></line-example>

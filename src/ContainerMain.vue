@@ -9,7 +9,7 @@
       <table-cars></table-cars>
       </v-flex>
       <v-flex xs6>
-      <table-cars></table-cars>
+      <table-beds></table-beds>
       </v-flex>
       </v-layout>
     </v-container>
@@ -17,9 +17,10 @@
 
 <script>
 import TableCars from './components/Table_Cars.vue'
+import TableBeds from './components/Table_Beds.vue'
 import LineRecentCall from './components/LineRecentCall.vue'
 export default{
-    components : {TableCars, LineRecentCall},
+    components : {TableCars,TableBeds, LineRecentCall},
     data: () => ({
 
     }),
