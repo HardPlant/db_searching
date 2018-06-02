@@ -1,5 +1,9 @@
 <template>
   <v-app id="app">
+    <v-toolbar color="black" dark fixed app>
+      <v-icon>call_to_action</v-icon>
+      <v-toolbar-title align-center>응급구조정보공유체계 현황판</v-toolbar-title>
+    </v-toolbar>
     <v-navigation-drawer
       v-model="drawer"
       permanent
@@ -15,6 +19,7 @@
             <v-list-tile-title>대시보드</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-divider></v-divider>
         <v-list-tile :to="{path:'/currentbeds'}">
           <v-list-tile-action>
             <v-icon>schedule</v-icon>
@@ -39,12 +44,19 @@
             <v-list-tile-title>응급구조 요청 현황</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-divider></v-divider>
+        <v-spacer></v-spacer>
+        <v-list-tile :to="{path:'/currentrequests'}">
+        <v-list-tile-action>
+          <v-icon>settings</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>환경 설정</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="black" dark fixed app>
-      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>응급구조정보공유체계 현황판</v-toolbar-title>
-    </v-toolbar>
+    
     <v-content>
         <v-container fluid>
             <v-fade-transition mode="out-in">

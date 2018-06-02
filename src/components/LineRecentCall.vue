@@ -14,7 +14,7 @@ import LineExample from './LineRecentCall.js'
 export default {
   name: 'app',
   props: {
-    width : {default : "50%"},
+    width : {default : "100%"},
     height : {default : "auto"},
   },
   components: {
