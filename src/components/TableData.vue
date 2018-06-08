@@ -1,0 +1,99 @@
+<template>
+    <v-card>
+            <v-card-title>
+                <h2>데이터 현황</h2>
+            </v-card-title>
+            <v-divider/>
+            <v-card-text>
+                <v-data-table
+                :headers="headers"
+                :items="beds"
+                :pagination.sync="pagination"
+                select-all
+                item-key="data_id"
+                class="elevation-1"
+                >
+                <template slot="headers" slot-scope="props">
+                <tr>
+                <th
+                v-for="header in props.headers"
+                :key="header.text"
+                :class="['column sortable', pagination.descending ? 'desc' : 'asc', header.value === pagination.sortBy ? 'active' : '']"
+                @click="changeSort(header.value)"
+                >
+                <v-icon small>arrow_upward</v-icon>
+                {{ header.text }}
+                </th>
+                </tr>
+                </template>
+                <template slot="items" slot-scope="props">
+                <tr :active="props.selected" @click="props.selected = !props.selected">
+                <td>{{ props.item.data_id }}</td>
+                <td class="text-xs-right">{{ props.item.title }}</td>
+                <td class="text-xs-right">{{ props.item.text }}</td>
+                <td class="text-xs-right">{{ props.item.url }}</td>
+                </tr>
+                </template>
+                </v-data-table>
+            </v-card-text>
+        </v-card>
+</template>
+
+<script>
+export default {data : ()=>({
+      pagination: {
+        sortBy: 'data_id'
+      },
+      headers: [
+        {
+          text: '데이터 번호',
+          align: 'left',
+          value: 'data_id'
+        },
+        { text: '제목', value: 'title' },
+        { text: '내용', value: 'text' },
+        { text: 'URL', value: 'url' },
+      ],
+      beds: [
+        {
+          value: false,
+          data_id: '1',
+          title : "홍길동전",
+          text : "삼원",
+          url : "삼성서",
+        },{
+          value: false,
+          data_id: '2',
+          title : "감돔전",
+          text : "삼울병원",
+          url : "삼성원",
+        },{
+          value: false,
+          data_id: '3',
+          title : "귀여운",
+          text : "울원",
+          url : "삼성원",
+        },
+        
+      ]
+    }),
+methods: {
+      toggleAll () {
+        if (this.selected.length) this.selected = []
+        else this.selected = this.beds.slice()
+      },
+      changeSort (column) {
+        if (this.pagination.sortBy === column) {
+          this.pagination.descending = !this.pagination.descending
+        } else {
+          this.pagination.sortBy = column
+          this.pagination.descending = false
+        }
+      }
+    }
+}
+</script>
+
+<style>
+
+</style>
