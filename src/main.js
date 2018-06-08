@@ -8,9 +8,11 @@ import ContainerMain from './ContainerMain.vue'
 import ContainerCarCalling from './ContainerCarCalling.vue'
 import ContainerCurrentBeds from './ContainerCurrentBeds.vue'
 import ContainerCurrentRequests from './ContainerCurrentRequests.vue'
-import ContainerRequest from './ContainerRequest.vue'
 
+import ContainerRequest from './ContainerRequest.vue'
 import ContainerDataMgmt from './ContainerDataMgmt.vue'
+import ContainerUsers from './ContainerUsers.vue'
+
 
 Vue.use(Vuetify)
 Vue.use(VueRouter)
@@ -30,11 +32,14 @@ const router = new VueRouter({
         path: '/currentrequests',
         component: ContainerCurrentRequests
     }, {
-        path: '/request',
+        path: '/requestmgmt',
         component: ContainerRequest
     }, {
         path: '/datamgmt',
         component: ContainerDataMgmt
+    }, {
+        path: '/usermgmt',
+        component: ContainerUsers
     }]
 })
 
