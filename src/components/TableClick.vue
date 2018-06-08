@@ -1,7 +1,7 @@
 <template>
     <v-card>
             <v-card-title>
-                <h2>요청 현황</h2>
+                <h2>조회 현황</h2>
             </v-card-title>
             <v-divider/>
             <v-card-text>
@@ -29,11 +29,8 @@
                 <template slot="items" slot-scope="props">
                 <tr :active="props.selected" @click="props.selected = !props.selected">
                 <td>{{ props.item.request_id }}</td>
-                <td class="text-xs-right">{{ props.item.title }}</td>
                 <td class="text-xs-right">{{ props.item.time }}</td>
-                <td class="text-xs-right">{{ props.item.user_id }}</td>
-                <td class="text-xs-right">{{ props.item.query }}</td>
-                <td class="text-xs-right">{{ props.item.num_results }}</td>
+                <td class="text-xs-right">{{ props.item.url }}</td>
                 </tr>
                 </template>
                 </v-data-table>
@@ -53,37 +50,25 @@ export default {data : ()=>({
           align: 'left',
           value: 'request_id'
         },
-        { text: '제목', value: 'title' },
-        { text: '내용', value: 'time' },
-        { text: '사용자 ID', value: 'user_id' },
-        { text: '검색 단어', value: 'query' },
-        { text: '결과 갯수', value: 'num_results' },
+        { text: '조회 시간', value: 'time' },
+        { text: '조회된 URL', value: 'url' },
       ],
       beds: [
         {
           value: false,
-          request_id: '1',
-          title : "홍길동전",
           time : "삼원",
-          user_id : "삼성서",
-          query : "쿼리",
-          num_results : 1
+          request_id: '1',
+          url : 1
         },{
           value: false,
           request_id: '2',
-          title : "감돔전",
           time : "삼울병원",
-          user_id : "삼성원",
-          query : "쿼리",
-          num_results : 1
+          url : 1
         },{
           value: false,
           request_id: '3',
-          title : "귀여운",
           time : "울원",
-          user_id : "삼성원",
-          query : "쿼리",
-          num_results : 1
+          url : 1
         },
         
       ]
