@@ -12,6 +12,7 @@ import ContainerCurrentRequests from './ContainerCurrentRequests.vue'
 import ContainerRequest from './ContainerRequest.vue'
 import ContainerDataMgmt from './ContainerDataMgmt.vue'
 import ContainerUsers from './ContainerUsers.vue'
+import ContainerSearch from './ContainerSearch.vue'
 
 
 Vue.use(Vuetify)
@@ -40,6 +41,9 @@ const router = new VueRouter({
     }, {
         path: '/usermgmt',
         component: ContainerUsers
+    }, {
+        path: '/search',
+        component: ContainerSearch
     }]
 })
 
