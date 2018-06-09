@@ -1,6 +1,7 @@
 let express = require('express')
 let oracledb = require('oracledb');
 let router = express.Router();
+oracledb.outFormat = oracledb.OBJECT;
 module.exports = function(connection) {
     router.get('/', (req, res) => {
         connection.execute(
@@ -43,6 +44,24 @@ module.exports = function(connection) {
                 url: { dir: oracledb.BIND_IN, val: url, type: oracledb.STRING }
             }).then((result) => {
             console.log(result.rows);
+            res.sendStatus(200);
+        }).catch((err) => {
+            console.error(err);
+            res.sendStatus(500)
+
+        });
+    })
+    router.post('/search', (req, res) => {
+        query = req.body.query;
+        connection.execute(
+            `BEGIN viewALL(:query, :title, :text, :url); END;`, {
+                query: query,
+                title: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 },
+                text: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 200 },
+                url: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 },
+            }).then((result) => {
+            console.log(result);
+            console.log(result.outBinds);
             res.sendStatus(200);
         }).catch((err) => {
             console.error(err);

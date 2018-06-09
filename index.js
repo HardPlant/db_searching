@@ -3,9 +3,10 @@ let app = express();
 let oracledb = require('oracledb');
 let process = require('process')
 let bodyParser = require('body-parser')
+let cors = require('cors')
     //oracledb.autoCommit = true;
 app.use(bodyParser.json());
-
+app.use(cors());
 
 oracledb.getConnection({
     user: "oracle",

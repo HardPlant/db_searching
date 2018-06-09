@@ -10,7 +10,7 @@
                 :items="users"
                 :pagination.sync="pagination"
                 select-all
-                item-key="user_id"
+                item-key="USER_ID"
                 class="elevation-1"
                 >
                 <template slot="headers" slot-scope="props">
@@ -28,10 +28,10 @@
                 </template>
                 <template slot="items" slot-scope="props">
                 <tr :active="props.selected" @click="props.selected = !props.selected">
-                <td>{{ props.item.user_id }}</td>
-                <td class="text-xs-right">{{ props.item.name }}</td>
-                <td class="text-xs-right">{{ props.item.email }}</td>
-                <td class="text-xs-right">{{ props.item.country }}</td>
+                <td>{{ props.item.USER_ID }}</td>
+                <td class="text-xs-right">{{ props.item.NAME }}</td>
+                <td class="text-xs-right">{{ props.item.EMAIL }}</td>
+                <td class="text-xs-right">{{ props.item.COUNTRY }}</td>
                 </tr>
                 </template>
                 </v-data-table>
@@ -41,49 +41,48 @@
 </template>
 
 <script>
-import CONF from "../Config.js";
-import eventBus from "../EventBus.js";
+import CONF from "./Config.js";
 
 export default {
   data : ()=>({
       pagination: {
-        sortBy: 'user_id'
+        sortBy: 'USER_ID'
       },
       headers: [
         {
           text: '사용자 번호',
           align: 'left',
-          value: 'user_id'
+          value: 'USER_ID'
         },
-        { text: '이름', value: 'name' },
-        { text: '이메일', value: 'email' },
-        { text: '국가', value: 'country' },
+        { text: '이름', value: 'NAME' },
+        { text: '이메일', value: 'EMAIL' },
+        { text: '국가', value: 'COUNTRY' },
       ],
       users: [
         {
           value: false,
-          user_id: '1',
-          name : "홍길동전",
-          email : "삼원",
-          country : "한국"
+          USER_ID: '1',
+          NAME : "홍길동전",
+          EMAIL : "삼원",
+          COUNTRY : "한국"
         },{
           value: false,
-          user_id: '1',
-          name : "홍길동전",
-          email : "삼원",
-          country : "한국"
+          USER_ID: '1',
+          NAME : "홍길동전",
+          EMAIL : "삼원",
+          COUNTRY : "한국"
         },{
           value: false,
-          user_id: '1',
-          name : "홍길동전",
-          email : "삼원",
-          country : "한국"
+          USER_ID: '1',
+          NAME : "홍길동전",
+          EMAIL : "삼원",
+          COUNTRY : "한국"
         },{
           value: false,
-          user_id: '1',
-          name : "홍길동전",
-          email : "삼원",
-          country : "한국"
+          USER_ID: '1',
+          NAME : "홍길동전",
+          EMAIL : "삼원",
+          COUNTRY : "한국"
         },
       ]
     }),  mounted: function() {

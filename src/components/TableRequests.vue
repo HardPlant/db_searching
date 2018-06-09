@@ -10,7 +10,7 @@
                 :items="requests"
                 :pagination.sync="pagination"
                 select-all
-                item-key="request_id"
+                item-key="REQUEST_ID"
                 class="elevation-1"
                 >
                 <template slot="headers" slot-scope="props">
@@ -28,12 +28,12 @@
                 </template>
                 <template slot="items" slot-scope="props">
                 <tr :active="props.selected" @click="props.selected = !props.selected">
-                <td>{{ props.item.request_id }}</td>
-                <td class="text-xs-right">{{ props.item.title }}</td>
-                <td class="text-xs-right">{{ props.item.time }}</td>
-                <td class="text-xs-right">{{ props.item.user_id }}</td>
-                <td class="text-xs-right">{{ props.item.query }}</td>
-                <td class="text-xs-right">{{ props.item.num_results }}</td>
+                <td>{{ props.item.REQUEST_ID }}</td>
+                <td class="text-xs-right">{{ props.item.TITLE }}</td>
+                <td class="text-xs-right">{{ props.item.TIME }}</td>
+                <td class="text-xs-right">{{ props.item.USER_ID }}</td>
+                <td class="text-xs-right">{{ props.item.QUERY }}</td>
+                <td class="text-xs-right">{{ props.item.NUM_RESULTS }}</td>
                 </tr>
                 </template>
                 </v-data-table>
@@ -43,50 +43,49 @@
 </template>
 
 <script>
-import CONF from "../Config.js";
-import eventBus from "../EventBus.js";
+import CONF from "./Config.js";
 
 export default {data : ()=>({
       pagination: {
-        sortBy: 'request_id'
+        sortBy: 'REQUEST_ID'
       },
       headers: [
         {
           text: '요청 번호',
           align: 'left',
-          value: 'request_id'
+          value: 'REQUEST_ID'
         },
-        { text: '제목', value: 'title' },
-        { text: '내용', value: 'time' },
-        { text: '사용자 ID', value: 'user_id' },
-        { text: '검색 단어', value: 'query' },
-        { text: '결과 갯수', value: 'num_results' },
+        { text: '제목', value: 'TITLE' },
+        { text: '내용', value: 'TIME' },
+        { text: '사용자 ID', value: 'USER_ID' },
+        { text: '검색 단어', value: 'QUERY' },
+        { text: '결과 갯수', value: 'NUM_RESULTS' },
       ],
       requests: [
         {
           value: false,
-          request_id: '1',
-          title : "홍길동전",
-          time : "삼원",
-          user_id : "삼성서",
-          query : "쿼리",
-          num_results : 1
+          REQUEST_ID: '1',
+          TITLE : "홍길동전",
+          TIME : "삼원",
+          USER_ID : "삼성서",
+          QUERY : "쿼리",
+          NUM_RESULTS : 1
         },{
           value: false,
-          request_id: '2',
-          title : "감돔전",
-          time : "삼울병원",
-          user_id : "삼성원",
-          query : "쿼리",
-          num_results : 1
+          REQUEST_ID: '2',
+          TITLE : "감돔전",
+          TIME : "삼울병원",
+          USER_ID : "삼성원",
+          QUERY : "쿼리",
+          NUM_RESULTS : 1
         },{
           value: false,
-          request_id: '3',
-          title : "귀여운",
-          time : "울원",
-          user_id : "삼성원",
-          query : "쿼리",
-          num_results : 1
+          REQUEST_ID: '3',
+          TITLE : "귀여운",
+          TIME : "울원",
+          USER_ID : "삼성원",
+          QUERY : "쿼리",
+          NUM_RESULTS : 1
         },
         
       ]

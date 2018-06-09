@@ -10,7 +10,7 @@
                 :items="datas"
                 :pagination.sync="pagination"
                 select-all
-                item-key="data_id"
+                item-key="DATA_ID"
                 class="elevation-1"
                 >
                 <template slot="headers" slot-scope="props">
@@ -28,10 +28,10 @@
                 </template>
                 <template slot="items" slot-scope="props">
                 <tr :active="props.selected" @click="props.selected = !props.selected">
-                <td>{{ props.item.data_id }}</td>
-                <td class="text-xs-right">{{ props.item.title }}</td>
-                <td class="text-xs-right">{{ props.item.text }}</td>
-                <td class="text-xs-right">{{ props.item.url }}</td>
+                <td>{{ props.item.DATA_ID }}</td>
+                <td class="text-xs-right">{{ props.item.TITLE }}</td>
+                <td class="text-xs-right">{{ props.item.TEXT }}</td>
+                <td class="text-xs-right">{{ props.item.URL }}</td>
                 </tr>
                 </template>
                 </v-data-table>
@@ -40,49 +40,51 @@
 </template>
 
 <script>
-import CONF from "../Config.js";
-import eventBus from "../EventBus.js";
+import CONF from "./Config.js";
 
 export default {data : ()=>({
       pagination: {
-        sortBy: 'data_id'
+        sortBy: 'DATA_ID'
       },
       headers: [
         {
           text: '데이터 번호',
           align: 'left',
-          value: 'data_id'
+          value: 'DATA_ID'
         },
-        { text: '제목', value: 'title' },
-        { text: '내용', value: 'text' },
-        { text: 'URL', value: 'url' },
+        { text: '제목', value: 'TITLE' },
+        { text: '내용', value: 'TEXT' },
+        { text: 'URL', value: 'URL' },
       ],
       datas: [
         {
           value: false,
-          data_id: '1',
-          title : "홍길동전",
-          text : "삼원",
-          url : "삼성서",
+          DATA_ID: '1',
+          TITLE : "홍길동전",
+          TEXT : "삼원",
+          URL : "삼성서",
         },{
           value: false,
-          data_id: '2',
-          title : "감돔전",
-          text : "삼울병원",
-          url : "삼성원",
+          DATA_ID: '2',
+          TITLE : "감돔전",
+          TEXT : "삼울병원",
+          URL : "삼성원",
         },{
           value: false,
-          data_id: '3',
-          title : "귀여운",
-          text : "울원",
-          url : "삼성원",
+          DATA_ID: '3',
+          TITLE : "귀여운",
+          TEXT : "울원",
+          URL : "삼성원",
         },
         
       ]
     }),
   mounted: function() {
-    console.log("[INFO] : ON MOUNT :");
+    console.log("[INFO] : Data URL is: ");
+    console.log(CONF)
+    console.log(CONF.data)
     this.fetchData();
+
   },
   methods: {
       toggleAll () {

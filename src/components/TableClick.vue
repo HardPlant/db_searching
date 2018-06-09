@@ -10,7 +10,7 @@
                 :items="clicks"
                 :pagination.sync="pagination"
                 select-all
-                item-key="request_id"
+                item-key="CLICK_ID"
                 class="elevation-1"
                 >
                 <template slot="headers" slot-scope="props">
@@ -28,9 +28,9 @@
                 </template>
                 <template slot="items" slot-scope="props">
                 <tr :active="props.selected" @click="props.selected = !props.selected">
-                <td>{{ props.item.request_id }}</td>
-                <td class="text-xs-right">{{ props.item.time }}</td>
-                <td class="text-xs-right">{{ props.item.url }}</td>
+                <td>{{ props.item.CLICK_ID }}</td>
+                <td class="text-xs-right">{{ props.item.TIME }}</td>
+                <td class="text-xs-right">{{ props.item.URL }}</td>
                 </tr>
                 </template>
                 </v-data-table>
@@ -40,44 +40,44 @@
 </template>
 
 <script>
-import CONF from "../Config.js";
-import eventBus from "../EventBus.js";
+import CONF from "./Config.js";
 
 export default {data : ()=>({
       pagination: {
-        sortBy: 'request_id'
+        sortBy: 'CLICK_ID'
       },
       headers: [
         {
           text: '요청 번호',
           align: 'left',
-          value: 'request_id'
+          value: 'CLICK_ID'
         },
-        { text: '조회 시간', value: 'time' },
-        { text: '조회된 URL', value: 'url' },
+        { text: '조회 시간', value: 'TIME' },
+        { text: '조회된 URL', value: 'URL' },
       ],
       clicks: [
         {
           value: false,
-          time : "삼원",
-          request_id: '1',
-          url : 1
+          TIME : "삼원",
+          CLICK_ID: '1',
+          URL : 1
         },{
           value: false,
-          request_id: '2',
-          time : "삼울병원",
-          url : 1
+          CLICK_ID: '2',
+          TIME : "삼울병원",
+          URL : 1
         },{
           value: false,
-          request_id: '3',
-          time : "울원",
-          url : 1
+          CLICK_ID: '3',
+          TIME : "울원",
+          URL : 1
         },
         
       ]
     }),
       mounted: function() {
     console.log("[INFO] : ON MOUNT :");
+    console.log(CONF.click)
     this.fetchData();
   },
 methods: {
@@ -95,7 +95,7 @@ methods: {
       },
       fetchData: function() {
       console.log(`[INFO] : fetching data at ${CONF.click}`);
-      this.$axios.get(CONF.clicks).then(response => {
+      this.$axios.get(CONF.click).then(response => {
         this.clicks = response.data;
         console.log("Fetch Result:");
         console.log(response);
