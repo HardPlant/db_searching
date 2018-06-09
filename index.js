@@ -1,9 +1,12 @@
-var express = require('express');
-var app = express();
-var oracledb = require('oracledb');
-var process = require('process')
+let express = require('express');
+let app = express();
+let oracledb = require('oracledb');
+let process = require('process')
+let bodyParser = require('body-parser')
+    //oracledb.autoCommit = true;
+app.use(bodyParser.json());
 
-let connection = ""
+
 oracledb.getConnection({
     user: "oracle",
     password: "oracle",
@@ -14,39 +17,25 @@ oracledb.getConnection({
         console.error(err);
         process.exit(1)
     }
-    connection = conn;
     console.log("Oracle connect Completed")
-});
 
-app.get('/test', (req, res) => {
-    connection.execute(
-        `SELECT * FROM DEPT`,
-        function(err, result) {
-            if (err) {
-                console.error(err);
-                res.sendStatus(500)
-            }
+    let db_user = require('./user.js')(conn);
+    app.use('/user', db_user);
+    let db_data = require('./data.js')(conn);
+    app.use('/data', db_data);
+
+    app.get('/test', (req, res) => {
+        connection.execute(`SELECT * FROM DEPT`).then((result) => {
             console.log(result.rows);
             res.send(result.rows);
-        });
-})
-app.get('/test2', (req, res) => {
-    connection.execute(
-        `SELECT * FROM usr`,
-        function(err, result) {
-            if (err) {
-                console.error(err);
-                res.sendStatus(500)
-            }
-            console.log(result.rows);
-            res.send(result.rows);
-        });
-})
-app.get('/schedules', (req, res) => {
-    res.json({ message: 'Welcome to the Server' });
-});
+        }).catch((err) => {
+            console.error(err);
+            res.sendStatus(500)
 
+        });
+    })
 
-app.listen(8085, () => {
-    console.log('API listening on port 8085');
+    app.listen(8085, () => {
+        console.log('API listening on port 8085');
+    });
 });

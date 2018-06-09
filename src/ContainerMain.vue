@@ -16,11 +16,8 @@
 </template>
 
 <script>
-import TableCars from './components/Table_Cars.vue'
-import TableBeds from './components/Table_Beds.vue'
-import LineRecentCall from './components/LineRecentCall.vue'
 export default{
-    components : {TableCars,TableBeds, LineRecentCall},
+    components : {},
     data: () => ({
 
     }),

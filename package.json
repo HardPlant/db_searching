@@ -6,15 +6,14 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "dev": "npm run server | npm run vue",
+        "start": "npm run server | npm run vue",
         "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-        "server": "pm2 start index.js --watch --name server",
-        "vue": "cross-env NODE_ENV=development pm2 start webpack-dev-server --name vue -- --open --hot",
-        "stop": "pm2 stop all",
-        "origin": "cross-env NODE_ENV=development webpack-dev-server --open --hot"
+        "server": "node index.js",
+        "vue": "cross-env NODE_ENV=development webpack-dev-server --open --hot"
     },
     "dependencies": {
         "axios": "^0.18.0",
+        "body-parser": "^1.18.3",
         "chart.js": "^2.7.2",
         "express": "^4.16.3",
         "material-design-icons-iconfont": "^3.0.3",
