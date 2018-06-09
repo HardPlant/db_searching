@@ -23,7 +23,7 @@
             :items="searchResults"
             :pagination.sync="pagination"
             select-all
-            item-key="data_id"
+            item-key="DATA_ID"
             class="elevation-1"
             >
             <template slot="headers" slot-scope="props">
@@ -41,10 +41,10 @@
             </template>
             <template slot="items" slot-scope="props">
             <tr :active="props.selected" @click="props.selected = !props.selected">
-            <td>{{ props.item.data_id }}</td>
-            <td class="text-xs-right">{{ props.item.title }}</td>
-            <td class="text-xs-right">{{ props.item.text }}</td>
-            <td class="text-xs-right">{{ props.item.url }}</td>
+            <td>{{ props.item.DATA_ID }}</td>
+            <td class="text-xs-right">{{ props.item.TITLE }}</td>
+            <td class="text-xs-right">{{ props.item.TEXT }}</td>
+            <td class="text-xs-right">{{ props.item.URL }}</td>
             </tr>
             </template>
             </v-data-table>
@@ -57,6 +57,8 @@
 
 <script>
 import TableRequests from './components/TableRequests.vue'
+import CONF from "./components/Config.js";
+
 export default{
     name : "container",
     components : {TableRequests},
@@ -65,39 +67,19 @@ export default{
         return {
       query : "", 
       pagination: {
-        sortBy: 'data_id'
+        sortBy: 'DATA_ID'
       },
       headers: [
         {
           text: '데이터 번호',
           align: 'left',
-          value: 'data_id'
+          value: 'DATA_ID'
         },
-        { text: '제목', value: 'title' },
-        { text: '내용', value: 'text' },
-        { text: 'URL', value: 'url' },
+        { text: '제목', value: 'TITLE' },
+        { text: '내용', value: 'TEXT' },
+        { text: 'URL', value: 'URL' },
       ],
-      searchResults: [
-        {
-          value: false,
-          data_id: '1',
-          title : "홍길동전",
-          text : "삼원",
-          url : "삼성서",
-        },{
-          value: false,
-          data_id: '2',
-          title : "감돔전",
-          text : "삼울병원",
-          url : "삼성원",
-        },{
-          value: false,
-          data_id: '3',
-          title : "귀여운",
-          text : "울원",
-          url : "삼성원",
-        },
-        
+      searchResults: [ 
       ]
     }
     },
@@ -117,8 +99,19 @@ export default{
           this.pagination.descending = false
         }
       },
-      searchQuery(){
-          console.log(this.query);
+      searchQuery() {
+      console.log(`[INFO] : fetching data at ${CONF.search}`);
+      console.log(this.query);
+      this.$axios.post(CONF.search,{
+        query:this.query
+      }).then(response => {
+        if(response.data.length == 0){
+          this.searchResults = [];
+        }
+        this.searchResults = response.data;
+        console.log("Fetch Result:");
+        console.log(response);
+      });
       }
     
     }

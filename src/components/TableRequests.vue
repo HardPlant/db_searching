@@ -29,7 +29,6 @@
                 <template slot="items" slot-scope="props">
                 <tr :active="props.selected" @click="props.selected = !props.selected">
                 <td>{{ props.item.REQUEST_ID }}</td>
-                <td class="text-xs-right">{{ props.item.TITLE }}</td>
                 <td class="text-xs-right">{{ props.item.TIME }}</td>
                 <td class="text-xs-right">{{ props.item.USER_ID }}</td>
                 <td class="text-xs-right">{{ props.item.QUERY }}</td>
@@ -55,8 +54,7 @@ export default {data : ()=>({
           align: 'left',
           value: 'REQUEST_ID'
         },
-        { text: '제목', value: 'TITLE' },
-        { text: '내용', value: 'TIME' },
+        { text: '검색 시간', value: 'TIME' },
         { text: '사용자 ID', value: 'USER_ID' },
         { text: '검색 단어', value: 'QUERY' },
         { text: '결과 갯수', value: 'NUM_RESULTS' },
@@ -65,7 +63,6 @@ export default {data : ()=>({
         {
           value: false,
           REQUEST_ID: '1',
-          TITLE : "홍길동전",
           TIME : "삼원",
           USER_ID : "삼성서",
           QUERY : "쿼리",
@@ -73,7 +70,6 @@ export default {data : ()=>({
         },{
           value: false,
           REQUEST_ID: '2',
-          TITLE : "감돔전",
           TIME : "삼울병원",
           USER_ID : "삼성원",
           QUERY : "쿼리",
@@ -81,7 +77,6 @@ export default {data : ()=>({
         },{
           value: false,
           REQUEST_ID: '3',
-          TITLE : "귀여운",
           TIME : "울원",
           USER_ID : "삼성원",
           QUERY : "쿼리",

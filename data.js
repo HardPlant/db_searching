@@ -52,19 +52,33 @@ module.exports = function(connection) {
         });
     })
     router.post('/search', (req, res) => {
-        query = req.body.query;
+        //       let user_id = req.body.user_id;
+        let user_id = 1;
+        let query = req.body.query;
+        console.log(query)
         connection.execute(
-            `BEGIN viewALL(:query, :title, :text, :url); END;`, {
-                query: query,
-                title: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 },
-                text: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 200 },
-                url: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 },
+            `SELECT * FROM Data WHERE INSTR(title, :query) > 0 OR INSTR(text, :query) > 0`, {
+                query: { dir: oracledb.BIND_IN, val: query, type: oracledb.STRING }
             }).then((result) => {
-            console.log(result);
-            console.log(result.outBinds);
-            res.sendStatus(200);
+            console.log(result.rows.length);
+            console.log(user_id);
+            console.log(query);
+            connection.execute(
+                `INSERT INTO Request (user_id, query, num_results)
+            VALUES(:user_id, :query, :num_results)`, {
+                    user_id: { dir: oracledb.BIND_IN, val: user_id, type: oracledb.INT },
+                    query: { dir: oracledb.BIND_IN, val: query, type: oracledb.STRING },
+                    num_results: { dir: oracledb.BIND_IN, val: result.rows.length, type: oracledb.INT }
+                }).then((nouse) => {
+                console.log(result.rows);
+                res.send(JSON.stringify(result.rows));
+
+            }).catch((err) => {
+                console.error(`Error at INSERT REQUEST : ${err}`);
+                res.sendStatus(500)
+            });
         }).catch((err) => {
-            console.error(err);
+            console.error(`Error at Python Query : ${err}`);
             res.sendStatus(500)
 
         });

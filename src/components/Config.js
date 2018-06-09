@@ -4,4 +4,5 @@ export default {
     "data": `${BASE_URL}/data`,
     "click": `${BASE_URL}/click`,
     "request": `${BASE_URL}/request`,
+    "search": `${BASE_URL}/data/search`,
 }
