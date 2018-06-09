@@ -7,7 +7,7 @@
             <v-card-text>
                 <v-data-table
                 :headers="headers"
-                :items="beds"
+                :items="datas"
                 :pagination.sync="pagination"
                 select-all
                 item-key="data_id"
@@ -40,6 +40,9 @@
 </template>
 
 <script>
+import CONF from "../Config.js";
+import eventBus from "../EventBus.js";
+
 export default {data : ()=>({
       pagination: {
         sortBy: 'data_id'
@@ -54,7 +57,7 @@ export default {data : ()=>({
         { text: '내용', value: 'text' },
         { text: 'URL', value: 'url' },
       ],
-      beds: [
+      datas: [
         {
           value: false,
           data_id: '1',
@@ -77,10 +80,14 @@ export default {data : ()=>({
         
       ]
     }),
-methods: {
+  mounted: function() {
+    console.log("[INFO] : ON MOUNT :");
+    this.fetchData();
+  },
+  methods: {
       toggleAll () {
         if (this.selected.length) this.selected = []
-        else this.selected = this.beds.slice()
+        else this.selected = this.datas.slice()
       },
       changeSort (column) {
         if (this.pagination.sortBy === column) {
@@ -89,7 +96,15 @@ methods: {
           this.pagination.sortBy = column
           this.pagination.descending = false
         }
-      }
+      },
+      fetchData: function() {
+      console.log(`[INFO] : fetching data at ${CONF.data}`);
+      this.$axios.get(CONF.data).then(response => {
+        this.datas = response.data;
+        console.log("Fetch Result:");
+        console.log(response);
+      });
+    }
     }
 }
 </script>

@@ -7,7 +7,7 @@
             <v-card-text>
                 <v-data-table
                 :headers="headers"
-                :items="beds"
+                :items="requests"
                 :pagination.sync="pagination"
                 select-all
                 item-key="request_id"
@@ -43,6 +43,9 @@
 </template>
 
 <script>
+import CONF from "../Config.js";
+import eventBus from "../EventBus.js";
+
 export default {data : ()=>({
       pagination: {
         sortBy: 'request_id'
@@ -59,7 +62,7 @@ export default {data : ()=>({
         { text: '검색 단어', value: 'query' },
         { text: '결과 갯수', value: 'num_results' },
       ],
-      beds: [
+      requests: [
         {
           value: false,
           request_id: '1',
@@ -87,11 +90,14 @@ export default {data : ()=>({
         },
         
       ]
-    }),
+    }),  mounted: function() {
+    console.log("[INFO] : ON MOUNT :");
+    this.fetchData();
+  },
 methods: {
       toggleAll () {
         if (this.selected.length) this.selected = []
-        else this.selected = this.beds.slice()
+        else this.selected = this.requests.slice()
       },
       changeSort (column) {
         if (this.pagination.sortBy === column) {
@@ -100,7 +106,15 @@ methods: {
           this.pagination.sortBy = column
           this.pagination.descending = false
         }
-      }
+      },
+      fetchData: function() {
+      console.log(`[INFO] : fetching data at ${CONF.request}`);
+      this.$axios.get(CONF.request).then(response => {
+        this.requests = response.data;
+        console.log("Fetch Result:");
+        console.log(response);
+      });
+    }
     }
 }
 </script>

@@ -41,7 +41,11 @@
 </template>
 
 <script>
-export default {data : ()=>({
+import CONF from "../Config.js";
+import eventBus from "../EventBus.js";
+
+export default {
+  data : ()=>({
       pagination: {
         sortBy: 'user_id'
       },
@@ -82,7 +86,10 @@ export default {data : ()=>({
           country : "한국"
         },
       ]
-    }),
+    }),  mounted: function() {
+    console.log("[INFO] : ON MOUNT :");
+    this.fetchData();
+  },
 methods: {
       toggleAll () {
         if (this.selected.length) this.selected = []
@@ -95,7 +102,15 @@ methods: {
           this.pagination.sortBy = column
           this.pagination.descending = false
         }
-      }
+      },
+      fetchData: function() {
+      console.log(`[INFO] : fetching data at ${CONF.user}`);
+      this.$axios.get(CONF.user).then(response => {
+        this.users = response.data;
+        console.log("Fetch Result:");
+        console.log(response);
+      });
+    }
     }
 }
 </script>

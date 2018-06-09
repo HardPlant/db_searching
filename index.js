@@ -23,6 +23,8 @@ oracledb.getConnection({
     app.use('/user', db_user);
     let db_data = require('./data.js')(conn);
     app.use('/data', db_data);
+    let db_request = require('./request.js')(conn);
+    app.use('/request', db_request);
     let db_click = require('./click.js')(conn);
     app.use('/click', db_click);
 
