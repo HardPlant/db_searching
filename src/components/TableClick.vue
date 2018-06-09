@@ -94,7 +94,7 @@ methods: {
         }
       },
       fetchData: function() {
-      console.log(`[INFO] : fetching data at ${CONF.clicks}`);
+      console.log(`[INFO] : fetching data at ${CONF.click}`);
       this.$axios.get(CONF.clicks).then(response => {
         this.clicks = response.data;
         console.log("Fetch Result:");
