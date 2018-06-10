@@ -127,3 +127,4 @@ INSERT INTO Request (user_id, query, num_results) VALUES(1, 'Python', 1);
 INSERT INTO Request (user_id, query, num_results) VALUES(1, 'Python', 1);
 INSERT INTO Request (user_id, query, num_results) VALUES(1, 'Python', 1);
 INSERT INTO Request (user_id, query, num_results) VALUES(1, 'Python', 1);
+commit;
