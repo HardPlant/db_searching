@@ -40,7 +40,7 @@
             </tr>
             </template>
             <template slot="items" slot-scope="props">
-            <tr :active="props.selected" @click="props.selected = !props.selected">
+            <tr :active="props.selected" @click="clickItem(props.item)">
             <td>{{ props.item.DATA_ID }}</td>
             <td class="text-xs-right">{{ props.item.TITLE }}</td>
             <td class="text-xs-right">{{ props.item.TEXT }}</td>
@@ -79,8 +79,13 @@ export default{
         { text: '내용', value: 'TEXT' },
         { text: 'URL', value: 'URL' },
       ],
+      addItem : {
+          REQUEST_ID: '',
+          URL : "",
+      },
       searchResults: [ 
-      ]
+      ],
+      request_id : -1
     }
     },
     methods:{
@@ -109,10 +114,25 @@ export default{
           this.searchResults = [];
         }
         this.searchResults = response.data;
-        console.log("Fetch Result:");
-        console.log(response);
+
+        this.$axios.get(`${CONF.request}/current`).then(number=>{
+          console.log("current value: ")
+          console.log(number.data[0]['CURRVAL']);
+          this.request_id = number.data[0]['CURRVAL'];
+        });
+
       });
-      }
+      
+      },
+      clickItem(item){
+        console.log(item);
+        this.$axios.post(`${CONF.click}`,{
+          request_id: this.request_id,
+          url: item["URL"]
+        }).then(response => {
+          window.open(item["URL"]);
+      });
+      },
     
     }
 }

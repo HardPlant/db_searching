@@ -2,6 +2,7 @@ let express = require('express')
 let oracledb = require('oracledb');
 let router = express.Router();
 oracledb.outFormat = oracledb.OBJECT;
+oracledb.autoCommit = true;
 module.exports = function(connection) {
     router.get('/', (req, res) => {
         let user_id = Number.parseInt(req.params.id);

@@ -14,20 +14,29 @@ module.exports = function(connection) {
 
         });
     })
+    router.get('/current', (req, res) => {
+        connection.execute(`SELECT Request_Sequence.CURRVAL FROM dual`, ).then((number) => {
+            console.log("CURRVAL");
+            console.log(number.rows);
+            res.send(number.rows);
+        })
+    })
+    return router;
+
     router.get('/:id', (req, res) => {
+        if (req.param.id == "current") return;
         let user_id = Number.parseInt(req.params.id);
         connection.execute(
             `SELECT Request.request_id,Request.time,usr.name,Request.query,Request.num_results
             FROM Request
                 INNER JOIN usr ON Request.user_id = usr.user_id;`, {
-                request_id: { dir: oracledb.BIND_IN, val: request_id, type: oracledb.NUMBER }
+                user_id: { dir: oracledb.BIND_IN, val: user_id, type: oracledb.NUMBER }
             }).then((result) => {
             console.log(result.rows);
             res.send(JSON.stringify(result.rows));
         }).catch((err) => {
             console.error(err);
             res.sendStatus(500)
-
         });
     })
     router.post('/', (req, res) => {
@@ -54,6 +63,19 @@ module.exports = function(connection) {
 
         });
     })
+    router.delete('/:id', (req, res) => {
+        let request_id = Number.parseInt(req.params.id);
+        connection.execute(
+            `DELETE FROM Request
+        WHERE request_id=:request_id`, {
+                request_id: { dir: oracledb.BIND_IN, val: request_id, type: oracledb.NUMBER }
+            }).then((result) => {
+            console.log(result.rows);
+            res.send(JSON.stringify(result.rows));
+        }).catch((err) => {
+            console.error(err);
+            res.sendStatus(500)
 
-    return router;
+        });
+    })
 }

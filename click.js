@@ -2,6 +2,7 @@ let express = require('express')
 let oracledb = require('oracledb');
 let router = express.Router();
 oracledb.outFormat = oracledb.OBJECT;
+oracledb.autoCommit = true;
 module.exports = function(connection) {
     router.get('/', (req, res) => {
         connection.execute(
@@ -30,16 +31,14 @@ module.exports = function(connection) {
         });
     })
     router.post('/', (req, res) => {
-        let time = req.body.time;
         let request_id = req.body.request_id;
         let url = req.body.url;
-        if (!time || !request_id || !url) return res.sendStatus(404);
+        if (!request_id || !url) return res.sendStatus(404);
         console.log(req.body);
 
         connection.execute(
-            `INSERT INTO Click (time, request_id, url)
-        VALUES(:time, :request_id, :url)`, {
-                time: { dir: oracledb.BIND_IN, val: time, type: oracledb.DATE },
+            `INSERT INTO Click (request_id, url)
+        VALUES(:request_id, :url)`, {
                 request_id: { dir: oracledb.BIND_IN, val: request_id, type: oracledb.INT },
                 url: { dir: oracledb.BIND_IN, val: url, type: oracledb.STRING }
             }).then((result) => {

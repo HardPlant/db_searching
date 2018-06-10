@@ -27,7 +27,7 @@
                 </tr>
                 </template>
                 <template slot="items" slot-scope="props">
-                <tr :active="props.selected" @click="props.selected = !props.selected">
+                <tr :active="props.selected" @click="deleteItem(props.item)">
                 <td>{{ props.item.REQUEST_ID }}</td>
                 <td class="text-xs-right">{{ props.item.TIME }}</td>
                 <td class="text-xs-right">{{ props.item.USER_ID }}</td>
@@ -37,7 +37,7 @@
                 </template>
                 </v-data-table>
             </v-card-text>
-            <p style="color:grey;text-align:right;margin-right:5px">요청을 클릭해 상세 조회 및 삭제할 수 있습니다.  </p>
+            <p style="color:grey;text-align:right;margin-right:5px">요청을 클릭해 삭제할 수 있습니다.  </p>
         </v-card>
 </template>
 
@@ -108,7 +108,17 @@ methods: {
         console.log("Fetch Result:");
         console.log(response);
       });
-    }
+      },
+      deleteData: function(item){
+        this.$axios.delete(`${CONF.request}/${item["REQUEST_ID"]}`).then(response => {
+          this.fetchData();
+        }
+        );
+      },
+      deleteItem (item) {
+        const index = this.requests.indexOf(item)
+        confirm('정말 삭제하시겠습니까?') && this.deleteData(item)
+      },
     }
 }
 </script>

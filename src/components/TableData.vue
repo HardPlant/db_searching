@@ -87,7 +87,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-
+      <!-- 데이터 업데이트 -->
       <v-dialog v-model="updateData" max-width="500px">
         <v-card>
           <v-card-title>
