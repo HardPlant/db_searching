@@ -1,12 +1,36 @@
 let express = require('express');
 let app = express();
 let oracledb = require('oracledb');
-let process = require('process')
-let bodyParser = require('body-parser')
+let process = require('process');
+let bodyParser = require('body-parser');
+let cookieParser = require('cookie-parser');
+let session = require('express-session')
 let cors = require('cors')
     //oracledb.autoCommit = true;
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(cors());
+app.use(session({
+    key: "sid",
+    secret: "secret",
+    cookie: {
+        maxAge: 1000 * 60 * 60
+    }
+}));
+app.use((req, res, next) => {
+    if (req.cookies.user_sid && !req.session.user) {
+        res.clearCookie('user_sid');
+    }
+    next();
+})
+
+var sessionChecker = (req, res, next) => {
+    if (req.session.user && req.cookies.user_sid) {
+        res.redirect('/dashboard');
+    } else {
+        next();
+    }
+};
 
 oracledb.getConnection({
     user: "oracle",
