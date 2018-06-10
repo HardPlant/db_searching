@@ -17,8 +17,9 @@ module.exports = function(connection) {
     router.get('/:id', (req, res) => {
         let user_id = Number.parseInt(req.params.id);
         connection.execute(
-            `SELECT * FROM Request
-        WHERE request_id=:request_id`, {
+            `SELECT Request.request_id,Request.time,usr.name,Request.query,Request.num_results
+            FROM Request
+                INNER JOIN usr ON Request.user_id = usr.user_id;`, {
                 request_id: { dir: oracledb.BIND_IN, val: request_id, type: oracledb.NUMBER }
             }).then((result) => {
             console.log(result.rows);
