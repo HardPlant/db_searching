@@ -89,7 +89,7 @@
                     <v-btn
                     color="primary"
               :disabled="!valid"
-              @click="submit"
+              @click="submitLogin()"
               >
               로그인
               </v-btn>
@@ -118,8 +118,14 @@ export default {
   },
   methods:{
     submit(){
-      alert(`${this.name}님, 가입이 완료되었습니다.`)
-      this.closeRegister();
+      this.$axios.post(`${CONF.data}`,{
+          name: this.name,
+          email: this.email,
+          country: this.country
+        }).then(response => {
+        alert(`${this.name}님, 가입이 완료되었습니다.`)
+        this.closeRegister();
+      });
     },
     closeRegister(){
       this.name = "";
