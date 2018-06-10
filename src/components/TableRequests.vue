@@ -30,6 +30,7 @@
                 <tr :active="props.selected" @click="deleteItem(props.item)">
                 <td>{{ props.item.REQUEST_ID }}</td>
                 <td class="text-xs-right">{{ props.item.TIME }}</td>
+                <td class="text-xs-right">{{ props.item.NAME }}</td>
                 <td class="text-xs-right">{{ props.item.USER_ID }}</td>
                 <td class="text-xs-right">{{ props.item.QUERY }}</td>
                 <td class="text-xs-right">{{ props.item.NUM_RESULTS }}</td>
@@ -55,34 +56,12 @@ export default {data : ()=>({
           value: 'REQUEST_ID'
         },
         { text: '검색 시간', value: 'TIME' },
+        { text: '사용자 이름', value: 'NAME' },
         { text: '사용자 ID', value: 'USER_ID' },
         { text: '검색 단어', value: 'QUERY' },
         { text: '결과 갯수', value: 'NUM_RESULTS' },
       ],
       requests: [
-        {
-          value: false,
-          REQUEST_ID: '1',
-          TIME : "삼원",
-          USER_ID : "삼성서",
-          QUERY : "쿼리",
-          NUM_RESULTS : 1
-        },{
-          value: false,
-          REQUEST_ID: '2',
-          TIME : "삼울병원",
-          USER_ID : "삼성원",
-          QUERY : "쿼리",
-          NUM_RESULTS : 1
-        },{
-          value: false,
-          REQUEST_ID: '3',
-          TIME : "울원",
-          USER_ID : "삼성원",
-          QUERY : "쿼리",
-          NUM_RESULTS : 1
-        },
-        
       ]
     }),  mounted: function() {
     console.log("[INFO] : ON MOUNT :");

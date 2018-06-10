@@ -13,23 +13,7 @@ BEGIN
     FROM dual;
 END;
 /
-CREATE SEQUENCE Country_Sequence START WITH 1 INCREMENT BY 1;
-/
-CREATE TABLE Country(
-country_id INT NOT NULL,
-name VARCHAR(20),
-PRIMARY KEY (country_id)
-);
-/
-CREATE OR REPLACE TRIGGER country_increment
-BEFORE INSERT ON Country
-FOR EACH ROW
-BEGIN
-    SELECT Country_Sequence.NEXTVAL
-    INTO :new.country_id
-    FROM dual;
-END;
-/
+
 CREATE SEQUENCE Request_Sequence START WITH 1 INCREMENT BY 1;
 /
 CREATE TABLE Request(
@@ -94,20 +78,13 @@ BEGIN
     INTO :new.data_id
     FROM dual;
 END;
-/
-INSERT INTO Country(name) VALUES ('KR');
-INSERT INTO Country(name) VALUES('JP');
-INSERT INTO Country(name) VALUES('US');
-INSERT INTO Country(name) VALUES('AU');
-INSERT INTO Country(name) VALUES('CH');
-SELECT * FROM Country;
-/
-INSERT INTO usr(name, email, country) VALUES('김랜덤', 'abc@example.com', (SELECT country_id FROM Country WHERE name = 'KR'));
-INSERT INTO usr(name, email, country) VALUES('이랜덤', 'abc@example.com', (SELECT country_id FROM Country WHERE name = 'KR'));
-INSERT INTO usr(name, email, country) VALUES('박랜덤', 'abc@example.com', (SELECT country_id FROM Country WHERE name = 'KR'));
-INSERT INTO usr(name, email, country) VALUES('최랜덤', 'abc@example.com', (SELECT country_id FROM Country WHERE name = 'KR'));
-INSERT INTO usr(name, email, country) VALUES('강랜덤', 'abc@example.com', (SELECT country_id FROM Country WHERE name = 'KR'));
-INSERT INTO usr(name, email, country) VALUES('선우랜덤', 'abc@example.com', (SELECT country_id FROM Country WHERE name = 'KR'));
+
+INSERT INTO usr(name, email, country) VALUES('김랜덤', 'abc@example.com', '한국');
+INSERT INTO usr(name, email, country) VALUES('비사이로', 'abc@example.com', 'Japan');
+INSERT INTO usr(name, email, country) VALUES('고려', 'abc@example.com', 'Korea');
+INSERT INTO usr(name, email, country) VALUES('왕서방', 'abc@example.com', 'China');
+INSERT INTO usr(name, email, country) VALUES('응웬탁', 'abc@example.com', 'Vietnam');
+INSERT INTO usr(name, email, country) VALUES('선우랜덤', 'abc@example.com', 'Indonesia');
 
 SELECT * FROM usr;
 /
@@ -123,8 +100,9 @@ INSERT INTO Data(title, text, url) VALUES('최신 공업수학','과제 내용','https://e
 INSERT INTO Data(title, text, url) VALUES('자바스크립트 라이브러리','실전 활용 라이브러리','https://example.com/posts/10');
 
 INSERT INTO Request (user_id, query, num_results) VALUES(1, 'Python', 1);
-INSERT INTO Request (user_id, query, num_results) VALUES(1, 'Python', 1);
-INSERT INTO Request (user_id, query, num_results) VALUES(1, 'Python', 1);
-INSERT INTO Request (user_id, query, num_results) VALUES(1, 'Python', 1);
-INSERT INTO Request (user_id, query, num_results) VALUES(1, 'Python', 1);
+INSERT INTO Request (user_id, query, num_results) VALUES(2, 'Python', 1);
+INSERT INTO Request (user_id, query, num_results) VALUES(3, 'Python', 1);
+INSERT INTO Request (user_id, query, num_results) VALUES(4, 'Python', 1);
+INSERT INTO Request (user_id, query, num_results) VALUES(5, 'Python', 1);
+
 commit;

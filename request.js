@@ -6,7 +6,9 @@ oracledb.autoCommit = true;
 module.exports = function(connection) {
     router.get('/', (req, res) => {
         connection.execute(
-            `SELECT * FROM Request`, ).then((result) => {
+            `SELECT Request.request_id,Request.time,usr.name,usr.user_id, Request.query,Request.num_results
+            FROM Request
+            INNER JOIN usr ON Request.user_id = usr.user_id`, ).then((result) => {
             console.log(result.rows);
             res.send(JSON.stringify(result.rows));
         }).catch((err) => {
@@ -30,7 +32,7 @@ module.exports = function(connection) {
         connection.execute(
             `SELECT Request.request_id,Request.time,usr.name,Request.query,Request.num_results
             FROM Request
-                INNER JOIN usr ON Request.user_id = usr.user_id;`, {
+                INNER JOIN usr ON Request.user_id = usr.user_id`, {
                 user_id: { dir: oracledb.BIND_IN, val: user_id, type: oracledb.NUMBER }
             }).then((result) => {
             console.log(result.rows);

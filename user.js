@@ -13,7 +13,6 @@ module.exports = function(connection) {
         }).catch((err) => {
             console.error(err);
             res.sendStatus(500)
-
         });
     })
     router.get('/:id', (req, res) => {
@@ -28,7 +27,6 @@ module.exports = function(connection) {
         }).catch((err) => {
             console.error(err);
             res.sendStatus(500)
-
         });
     })
     router.post('/', (req, res) => {
@@ -41,7 +39,7 @@ module.exports = function(connection) {
 
         connection.execute(
             `INSERT INTO usr (name, email, country)
-        VALUES(:name, :email, (SELECT country_id FROM Country WHERE name = :country))`, {
+        VALUES(:name, :email, :country)`, {
                 name: { dir: oracledb.BIND_IN, val: name, type: oracledb.STRING },
                 email: { dir: oracledb.BIND_IN, val: email, type: oracledb.STRING },
                 country: { dir: oracledb.BIND_IN, val: country, type: oracledb.STRING }
@@ -68,7 +66,7 @@ module.exports = function(connection) {
                 user_id: { dir: oracledb.BIND_IN, val: user_id, type: oracledb.NUMBER },
                 name: { dir: oracledb.BIND_IN, val: name, type: oracledb.STRING },
                 email: { dir: oracledb.BIND_IN, val: email, type: oracledb.STRING },
-                country: { dir: oracledb.BIND_IN, val: country, type: oracledb.NUMBER }
+                country: { dir: oracledb.BIND_IN, val: country, type: oracledb.STRING }
             }).then((result) => {
             console.log(result.rows);
             res.send(JSON.stringify(result.rows));
@@ -111,9 +109,10 @@ module.exports = function(connection) {
             } else {
                 console.log(result.rows)
                 res.send({
-                        user_id: result.rows[0]["USER_ID"],
-                        name: result.rows[0]["NAME"]
-                    })
+                    user_id: result.rows[0]["USER_ID"],
+                    name: result.rows[0]["NAME"]
+                })
+                alert()
                     //req.session.user_id = result.rows[0][user_id];
                     //req.session.name = result.rows[0][name];
             }

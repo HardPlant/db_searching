@@ -37,7 +37,7 @@
               :disabled="!valid"
               @click="submit"
               >
-              가입하기
+              추가하기
               </v-btn>
                   <v-btn  @click.stop="addUser=false">닫기</v-btn>
                 </v-card-actions>
@@ -50,6 +50,8 @@
 
 <script>
 import TableUser from './components/TableUser.vue'
+import CONF from "./components/Config.js";
+
 export default{
     name : "container",
     components : {TableUser},
@@ -63,10 +65,22 @@ export default{
         }
     },
     methods:{
-        submit : ()=>{
-            console.log("OK!");
-            this.addData=false;
+        submit(){
+                  this.$axios.post(`${CONF.user}`,{
+          name: this.name,
+          email: this.email,
+          country: this.country
+        }).then(response => {
+        alert(`${this.name} 사용자 추가가 완료되었습니다.`)
+        this.closeRegister();
+        });
         },
+        closeRegister(){
+        this.name = "";
+        this.email = "";
+        this.country = "";
+        this.addUser=false;
+        }
     }
 }
 </script>
