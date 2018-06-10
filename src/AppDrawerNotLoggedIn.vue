@@ -102,6 +102,7 @@
 
 <script>
 import {EventBus} from './components/EventBus.js'
+import CONF from "./components/Config.js";
 
 export default {
   data (){
@@ -125,6 +126,18 @@ export default {
         }).then(response => {
         alert(`${this.name}님, 가입이 완료되었습니다.`)
         this.closeRegister();
+      });
+    },
+    submitLogin(){
+      this.$axios.post(`${CONF.login}`,{
+          name: this.name,
+          email: this.email,
+        }).then(response => {
+          console.log(response.data);
+          if(response.data){
+            alert(`${response.data['name']}님 환영합니다!`)
+          }
+        this.closeLogin();
       });
     },
     closeRegister(){

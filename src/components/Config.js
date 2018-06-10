@@ -5,4 +5,5 @@ export default {
     "click": `${BASE_URL}/click`,
     "request": `${BASE_URL}/request`,
     "search": `${BASE_URL}/data/search`,
+    "login": `${BASE_URL}/user/login`,
 }

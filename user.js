@@ -37,6 +37,7 @@ module.exports = function(connection) {
         let country = req.body.country;
         if (!name || !email || !country) return res.sendStatus(404);
         console.log(req.body);
+        console.log("POST");
 
         connection.execute(
             `INSERT INTO usr (name, email, country)
@@ -92,22 +93,26 @@ module.exports = function(connection) {
         });
     })
     router.post('/login', (req, res) => {
+
+        console.log("LOGIN");
         let name = req.body.name;
         let email = req.body.email;
-        if (!name || !email || !country) return res.sendStatus(404);
+        if (!name || !email) return res.sendStatus(404);
         console.log(req.body);
 
         connection.execute(
-            `SELECT * FROM usr
-        WHERE name=:name, email=:email`, {
+            `SELECT * FROM usr WHERE name=:name AND email=:email`, {
                 name: { dir: oracledb.BIND_IN, val: name, type: oracledb.STRING },
                 email: { dir: oracledb.BIND_IN, val: email, type: oracledb.STRING }
             }).then((result) => {
-            if (result.rows.length == 0) return res.sendStatus(404);
-            else {
+            if (result.rows.length == 0) {
+                console.log("NOT FOUND!")
+                return res.sendStatus(404);
+            } else {
+                console.log(result.rows)
                 res.send({
-                        user_id: result.rows[0][user_id],
-                        name: result.rows[0][name]
+                        user_id: result.rows[0]["USER_ID"],
+                        name: result.rows[0]["NAME"]
                     })
                     //req.session.user_id = result.rows[0][user_id];
                     //req.session.name = result.rows[0][name];
