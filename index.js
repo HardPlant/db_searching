@@ -31,6 +31,9 @@ var sessionChecker = (req, res, next) => {
         next();
     }
 };
+app.get('/', sessionChecker, (req, res) => {
+    res.redirect('/login');
+});
 
 oracledb.getConnection({
     user: "oracle",
