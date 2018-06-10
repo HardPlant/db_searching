@@ -24,7 +24,79 @@
             <v-list-tile-title>로그인</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-    
+          <v-dialog v-model="showRegister" max-width="500px">
+              <v-card>
+                <v-card-title>
+                  회원가입
+                </v-card-title>
+                <v-card-text>
+                  <v-form>
+              <v-text-field
+              v-model="name"
+              :rules="[v=>!!v || '이름은 필수입니다']"
+              label="이름"
+              required></v-text-field>
+              <v-text-field
+              v-model="email"
+              :rules="[v=>!!v || '이메일은 필수입니다']"
+              label="이메일"
+              required></v-text-field>
+              <v-text-field
+              v-model="country"
+              :rules="[v=>!!v || '국가값은 필수입니다']"
+              label="국가"
+              required></v-text-field>
+              
+              <v-divider></v-divider>
+              
+                  </v-form>
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn
+                    color="primary"
+              :disabled="!valid"
+              @click="submit"
+              >
+              가입하기
+              </v-btn>
+                  <v-btn @click="closeRegister()">닫기</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-dialog v-model="showLogin" max-width="500px">
+              <v-card>
+                <v-card-title>
+                  로그인
+                </v-card-title>
+                <v-card-text>
+                  <v-form>
+              <v-text-field
+              v-model="name"
+              :rules="[v=>!!v || '이름은 필수입니다']"
+              label="이름"
+              required></v-text-field>
+              <v-text-field
+              v-model="email"
+              :rules="[v=>!!v || '이메일은 필수입니다']"
+              label="이메일"
+              required></v-text-field>
+              
+              <v-divider></v-divider>
+              
+                  </v-form>
+                </v-card-text>
+                <v-card-actions>
+                    <v-btn
+                    color="primary"
+              :disabled="!valid"
+              @click="submit"
+              >
+              로그인
+              </v-btn>
+                  <v-btn @click="closeLogin()">닫기</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
     </div>
 </template>
 
@@ -34,11 +106,34 @@ import {EventBus} from './components/EventBus.js'
 export default {
   data (){
       return {
+        showRegister:false,
+        showLogin:false,
+        valid:true,
+        name:"",
+        email:"",
+        country:""
       }
   },
   mounted(){    
   },
   methods:{
+    submit(){
+      alert(`${this.name}님, 가입이 완료되었습니다.`)
+      this.closeRegister();
+    },
+    closeRegister(){
+      this.name = "";
+      this.email = "";
+      this.country = "";
+      this.showRegister=false;
+    },
+    closeLogin(){
+      this.name = "";
+      this.email = "";
+      this.country = "";
+      this.showLogin=false;
+    },
+
   }
 }
 </script>

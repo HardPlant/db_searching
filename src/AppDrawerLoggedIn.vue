@@ -35,7 +35,7 @@
             <h3>탈퇴하려면 아래에 회원탈퇴라고 입력하십시오.</h3>
             <v-form>
         <v-text-field
-        v-model="name"
+        v-model="confirm"
         :rules="[v=>!!v || '올바르지 않은 값입니다.']"
         label="회원탈퇴"
         required></v-text-field>
@@ -62,14 +62,20 @@
 export default {
     data (){
         return {
-            name:"",
+            confirm:"",
             dialog:false,
             valid:true
         }
     },
     methods:{
       submit(){
-        
+        if(this.confirm == "회원탈퇴"){
+          console.log("회원탈퇴");
+        }
+        else{
+          confirm = "";
+          this.dialog=false;
+        }
       }
     }
 }
