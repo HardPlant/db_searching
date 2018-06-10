@@ -1,5 +1,13 @@
 <template>
     <div>
+        <v-list-tile :to="{path:'/'}">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>메인 화면</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
           <v-list-tile :to="{path:'/datamgmt'}">
           <v-list-tile-action>
             <v-icon>schedule</v-icon>

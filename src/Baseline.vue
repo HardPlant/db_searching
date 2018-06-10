@@ -22,11 +22,11 @@
         </v-list-tile-sub-title>
         </v-list-tile>
         <v-divider></v-divider>
-        <app-drawer-not-logged-in></app-drawer-not-logged-in>
+        <app-drawer-not-logged-in v-show="guest"></app-drawer-not-logged-in>
         <v-divider></v-divider>
-        <app-drawer-logged-in></app-drawer-logged-in>
+        <app-drawer-logged-in v-show="member"></app-drawer-logged-in>
         <v-divider></v-divider>
-        <app-drawer-admin></app-drawer-admin>
+        <app-drawer-admin v-show="admin"></app-drawer-admin>
       </v-list>
     </v-navigation-drawer>
     <v-content>
@@ -44,11 +44,10 @@
 </template>
 
 <script>
-
+import {EventBus} from './components/EventBus.js'
 import AppDrawerNotLoggedIn from './AppDrawerNotLoggedIn.vue'
 import AppDrawerLoggedIn from './AppDrawerLoggedIn.vue'
 import AppDrawerAdmin from './AppDrawerAdmin.vue'
-
   export default {
     data: () => ({
       drawer: null,
@@ -57,13 +56,33 @@ import AppDrawerAdmin from './AppDrawerAdmin.vue'
       requester :'1',
       lang : 0,
       long : 0,
-      major : ''
+      major : '',
+      guest: true,
+      member: false,
+      admin: false
     }),
     props: {
       source: String
     },
     components : {
       AppDrawerNotLoggedIn, AppDrawerLoggedIn, AppDrawerAdmin
+    },
+    mounted(){
+      EventBus.$on('guest', (value)=>{
+  this.guest = value
+  this.member = !value
+  this.admin = !value
+    })
+    EventBus.$on('member', (value)=>{
+  this.guest = !value
+  this.member = value
+  this.admin = !value
+    })
+    EventBus.$on('admin', (value)=>{
+  this.guest = !value
+  this.member = !value
+  this.admin = value
+    })
     },
 
     methods: {

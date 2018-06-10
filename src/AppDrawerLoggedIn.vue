@@ -1,6 +1,14 @@
 <template>
     <div>
-                <v-list-tile :to="{path:'/search'}">
+          <v-list-tile :to="{path:'/'}">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>메인 화면</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+          <v-list-tile :to="{path:'/search'}">
           <v-list-tile-action>
             <v-icon>schedule</v-icon>
           </v-list-tile-action>
@@ -54,9 +62,15 @@
 export default {
     data (){
         return {
+            name:"",
             dialog:false,
             valid:true
         }
+    },
+    methods:{
+      submit(){
+        
+      }
     }
 }
 </script>
